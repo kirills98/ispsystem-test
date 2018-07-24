@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {EmojiModel, EmojiStatus} from '../models/emoji.model';
 import {HttpClient} from '@angular/common/http';
+import {MatDialog} from '@angular/material';
+import {ErrorData, ErrorDialogComponent} from '../components/error-dialog/error-dialog.component';
 
 
 export const LOCAL_STORAGE_KEY = 'emojis';
@@ -14,7 +16,10 @@ export class EmojiService {
   public emojis: EmojiModel[] = [];
   public search = '';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog
+  ) {
     this.storage = JSON.parse(DRIVER.getItem(LOCAL_STORAGE_KEY) || '{}');
   }
 
@@ -23,14 +28,18 @@ export class EmojiService {
   }
 
   async getEmojis(): Promise<EmojiModel[]> {
-    let data = await this.http.get('https://api.github.com/emojis').toPromise();
-    // let data = await this.http.get('/api/emojis').toPromise(); // todo: REMOVE IT!!!!
-    this.emojis = this.load(
-      Object
-        .keys(data)
-        .map(name => new EmojiModel({name, url: data[name]}))
-    );
-    return this.emojis;
+    try {
+      let data = await this.http.get('https://api.github.com/emojis').toPromise();
+      // let data = await this.http.get('/api/emojis').toPromise(); // todo: REMOVE IT!!!!
+      this.emojis = this.load(
+        Object
+          .keys(data)
+          .map(name => new EmojiModel({name, url: data[name]}))
+      );
+      return this.emojis;
+    } catch (e) {
+      this.handleError(e);
+    }
   }
 
   load(emojis: EmojiModel[]) {
@@ -50,5 +59,9 @@ export class EmojiService {
       this.storage[emoji.name] = emoji.status;
     }
     DRIVER.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.storage));
+  }
+
+  handleError(e: ErrorData) {
+    setTimeout(() => this.dialog.open(ErrorDialogComponent, {data: e}));
   }
 }

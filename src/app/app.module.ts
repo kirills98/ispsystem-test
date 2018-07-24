@@ -17,6 +17,7 @@ import {InMemoryDataService} from './services/in-memory-data.service';
 import {EmojisButtonFavoriteComponent} from './components/emojis-button-favorite/emojis-button-favorite.component';
 import {EmojisButtonDeleteComponent} from './components/emojis-button-delete/emojis-button-delete.component';
 import {EmojisButtonRestoreComponent} from './components/emojis-button-restore/emojis-button-restore.component';
+import {ErrorDialogComponent} from './components/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {EmojisButtonRestoreComponent} from './components/emojis-button-restore/e
     EmojisDataComponent,
     EmojisButtonFavoriteComponent,
     EmojisButtonDeleteComponent,
-    EmojisButtonRestoreComponent
+    EmojisButtonRestoreComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import {EmojisButtonRestoreComponent} from './components/emojis-button-restore/e
     // )
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorDialogComponent]
 })
 export class AppModule {
 }

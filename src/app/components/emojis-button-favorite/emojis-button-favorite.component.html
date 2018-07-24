@@ -1,0 +1,8 @@
+<button mat-icon-button
+        [color]="emoji.status !== EmojiStatus.Favorite ? 'black' : 'accent'"
+        [matTooltip]="emoji.status !== EmojiStatus.Favorite ? 'В любимое' : 'Убрать из любимого'"
+        matTooltipPosition="right"
+        (click)="do.emit(emoji)"
+>
+  <mat-icon>star</mat-icon>
+</button>

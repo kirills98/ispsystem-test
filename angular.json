@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "ispsystem-test"
+  "defaultProject": "ispsystem-test",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "styl"
+    }
+  }
 }

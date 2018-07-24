@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="mat-elevation-z4 app-toolbar">
+  <div fxShow fxHide.gt-xs>
+    <button mat-button (click)="menuCLick.emit()" class="app-toolbar-menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <span class="app-toolbar-title">GitHub Emojis | {{title}}</span>
+  <span fxFlex></span>
+  <mat-form-field floatLabel="never" color="primary" class="app-toolbar-search">
+    <mat-icon matPrefix class="app-toolbar-search-icon">search</mat-icon>
+    <input matInput placeholder="Поиск" [(ngModel)]="service.search">
+  </mat-form-field>
+</mat-toolbar>

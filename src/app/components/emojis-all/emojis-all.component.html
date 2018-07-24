@@ -1,0 +1,6 @@
+<app-emojis-data [emojis]="emojis">
+  <ng-template let-emoji>
+    <app-emojis-button-favorite [emoji]="emoji" (do)="clickFavorite(emoji)"></app-emojis-button-favorite>
+    <app-emojis-button-delete [emoji]="emoji" (do)="clickDelete(emoji)"></app-emojis-button-delete>
+  </ng-template>
+</app-emojis-data>

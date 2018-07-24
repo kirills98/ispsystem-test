@@ -1,0 +1,5 @@
+<app-emojis-data [emojis]="emojis">
+  <ng-template let-emoji>
+    <app-emojis-button-restore [emoji]="emoji" (do)="clickRestore(emoji)"></app-emojis-button-restore>
+  </ng-template>
+</app-emojis-data>
